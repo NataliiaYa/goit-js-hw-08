@@ -12,7 +12,8 @@ const refs = {
 };
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
+refs.form.addEventListener('input', throttle(onTextareaInput, 500));
+
 
 let data = {
     email: ' ',
@@ -24,16 +25,18 @@ populateTextarea();
 
 function onFormSubmit(evt) {
     evt.preventDefolt(); //забороняємо перезавантаження сторінки
-    
-    evt.currentTarget.resent(); //очищуємо форму після відправки
-    localStorage.removeItem('feedback-form'); //очищуємо форму післґ відправки
+    if (input.value === "" || refs.textarea.value === "") {
+        return alert(`All fields must be filled!`);
+    };
+    evt.currentTarget.reset(); //очищуємо форму після відправки
+    localStorage.removeItem('feedback-form'); //очищуємо форму після відправки
     console.log(data);
     data.email = '';
     data.message = '';
 };
 
 function onTextareaInput(evt) { 
-    data[e.target.name] = e.target.value; //отримуємо повідомлення і імейл
+    data[evt.target.name] = evt.target.value; //отримуємо повідомлення і імейл
 
     localStorage.setItem('feedback-form', JSON.stringify(data)); //записали в локалсторейдж
 };
@@ -43,7 +46,7 @@ function populateTextarea() {
     const savedMassege = localStorage.getItem('feedback-form'); //зберігаємо значення з локалсторейдж
 
     if (savedMassege) {
-        data = JSON.parse(savedData);
+        data = JSON.parse(savedMassege);
         let { email, message } = refs.form.elements;
 
         email.value = data.email;
