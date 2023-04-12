@@ -25,14 +25,14 @@ populateTextarea();
 
 function onFormSubmit(evt) {
     evt.preventDefault(); //забороняємо перезавантаження сторінки
-    if (refs.input.value === "" || refs.textarea.value === "") {
-        return alert(`All fields must be filled!`);
-    };
+    // if (refs.input.value === "" || refs.textarea.value === "") {
+    //     return alert(`All fields must be filled!`);
+    // };
     evt.currentTarget.reset(); //очищуємо форму після відправки
     localStorage.removeItem('feedback-form'); //очищуємо форму після відправки
     console.log(data);
-    data.email = '';
-    data.message = '';
+    // data.email = '';
+    // data.message = '';
 };
 
 function onTextareaInput(evt) { 
