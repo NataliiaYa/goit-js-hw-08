@@ -25,7 +25,7 @@ populateTextarea();
 
 function onFormSubmit(evt) {
     evt.preventDefault(); //забороняємо перезавантаження сторінки
-    if (input.value === "" || refs.textarea.value === "") {
+    if (refs.input.value === "" || refs.textarea.value === "") {
         return alert(`All fields must be filled!`);
     };
     evt.currentTarget.reset(); //очищуємо форму після відправки
